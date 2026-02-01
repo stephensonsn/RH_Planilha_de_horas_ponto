@@ -1,8 +1,9 @@
-# Módulo de Timesheet e Aprovações - Humanamente
+# Módulo de Timesheet e Aprovações PJ - Humanamente
 
-**Projeto:** Substituição do Módulo de Horas e Batida de Ponto  
+**Projeto:** Substituição do Módulo de Horas e Ponto  
+**Perfil:** Colaboradores PJ (Pessoa Jurídica) e Gestores  
 **Stack:** React + TypeScript + Supabase + Tailwind CSS  
-**Baseado em:** Análise Interativa das Demos Kimai e MarcaPonto
+**Baseado em:** Análise Interativa da Demo Kimai
 
 ---
 
@@ -11,10 +12,10 @@
 ### 🎯 **DOCUMENTO MESTRE**
 👉 **[ARQUITETURA_COMPLETA_TIMESHEET_HUMANAMENTE.md](./ARQUITETURA_COMPLETA_TIMESHEET_HUMANAMENTE.md)** 👈
 
-Este é o **documento principal** que consolida toda a arquitetura visual, funcional e técnica do módulo. Ele unifica as análises dos perfis **Colaborador (PJ e CLT)** e **Team Leader (Gestor)**, fornecendo um guia único e completo para a implementação.
+Este é o **documento principal** que consolida toda a arquitetura visual, funcional e técnica do módulo de timesheet para colaboradores PJ. Ele unifica as análises dos perfis **Colaborador PJ** e **Team Leader (Gestor)**, fornecendo um guia único e completo para a implementação.
 
 **Conteúdo:**
-- ✅ Wireframes completos de todas as interfaces (PJ, CLT, Gestor)
+- ✅ Wireframes completos de todas as interfaces (Colaborador PJ e Gestor)
 - ✅ Arquitetura técnica do banco de dados (Supabase)
 - ✅ Componentes React principais
 - ✅ Automações (Edge Functions)
@@ -28,7 +29,7 @@ Este é o **documento principal** que consolida toda a arquitetura visual, funci
 #### 1. Análise do Colaborador PJ (Kimai)
 📁 **[analise_kimai_detalhada/](./analise_kimai_detalhada/)**
 
-Análise completa da interface de apontamento de horas para terceiros (PJ), baseada na demo interativa do Kimai.
+Análise completa da interface de apontamento de horas para colaboradores PJ, baseada na demo interativa do Kimai.
 
 **Documentos:**
 - `analise_completa_kimai_pj.md` - Documento mestre com wireframes e fluxos
@@ -53,7 +54,7 @@ Análise completa da interface de aprovação de horas para gestores, baseada na
 Documentos técnicos criados na primeira fase da análise:
 
 - `PLANO_COMPLETO_INTEGRACAO_TIMESHEET.md` - Plano estratégico inicial
-- `analise_profunda_repositorios.md` - Análise do código-fonte do Kimai e MarcaPonto
+- `analise_profunda_repositorios.md` - Análise do código-fonte do Kimai
 - `wireframes_e_fluxos.md` - Wireframes ASCII art e fluxos de tela
 - `arquitetura_banco_dados.md` - Schema completo com migrations SQL
 - `traducoes_regras_negocio.md` - Componentes React traduzidos
@@ -63,34 +64,31 @@ Documentos técnicos criados na primeira fase da análise:
 
 ## 🎯 Visão Geral da Solução
 
-### Diferenciação de Perfis
+### Perfis de Usuário
 
-**Colaborador PJ (Kimai):**
+**Colaborador PJ:**
 - Interface rica com timer ativo e lançamento manual
 - Apontamento por projeto e atividade
 - Cálculo automático de valor (horas × valor/hora)
+- Dashboard com gráficos e resumos
+- Visualização em calendário
 - Widget de valor projetado com toggle de visibilidade
-
-**Colaborador CLT (MarcaPonto):**
-- Interface simplificada de batida de ponto
-- Captura automática de geolocalização
-- Espelho de ponto do dia
-- Sem valores financeiros na home
 
 **Team Leader (Gestor):**
 - Visão consolidada de toda a equipe
 - Filtros avançados (status, usuário, período, projeto)
 - Ações em massa (aprovar, rejeitar, exportar)
 - Modal de rejeição com motivo obrigatório
+- Edição de registros com auditoria
 
 ### Fluxo End-to-End
 
-1. **Apontamento:** Colaboradores registram suas horas (PJ) ou batem ponto (CLT)
-2. **Submissão:** Ao final do período, submetem para aprovação (status: `pending`)
+1. **Apontamento:** Colaborador PJ registra horas via timer ou lançamento manual
+2. **Submissão:** Ao final do período, submete para aprovação (status: `pending`)
 3. **Notificação:** Gestor é notificado por e-mail
 4. **Aprovação:** Gestor aprova ou rejeita os registros
 5. **Automação:**
-   - Se aprovado (PJ): Cria Pedido de Compra automaticamente
+   - Se aprovado: Cria Pedido de Compra automaticamente
    - Se rejeitado: Notifica colaborador com motivo
    - E-mails disparados em cada etapa
 
@@ -101,7 +99,6 @@ Documentos técnicos criados na primeira fase da análise:
 - **Frontend:** React + TypeScript + Tailwind CSS
 - **Backend:** Supabase (PostgreSQL + Edge Functions)
 - **Autenticação:** Supabase Auth
-- **Geolocalização:** PostGIS (extensão do PostgreSQL)
 - **E-mails:** Resend ou SendGrid
 
 ---
@@ -131,7 +128,7 @@ RH_Planilha_de_horas_ponto/
 │   ├── analise_teamlead_dashboard.md
 │   └── analise_teamlead_all_times.md
 └── assets/
-    └── (20 screenshots de referência)
+    └── (20 screenshots de referência do Kimai)
 ```
 
 ---
